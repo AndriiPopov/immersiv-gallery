@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+.App {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: black;
+}
+
+.buttons {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    fill: white;
+}
+
+.buttons > div {
+    margin: 20px;
+    cursor: pointer;
+    border: 4px solid transparent;
+    transition: border 0.3s ease-out;
+}
+
+.buttons > div:hover,
+.buttons > div.active {
+    outline: none;
+    border: 4px solid #337ab7;
+}
+
+.image-gallery,
+.image-gallery-content,
+.image-gallery-slide-wrapper {
+    flex: 1;
+    display: flex !important;
+    overflow: hidden;
+}
+
+.image-gallery-swipe {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.image-gallery-image {
+    max-height: calc(100vh - 50px) !important;
+}
+
+.image-gallery-thumbnails-wrapper {
+    overflow-y: auto;
+}
+
+.image-gallery-thumbnails {
+    height: auto !important;
+}
+
+.image-gallery-slides,
+.youtubeContainer,
+.image-gallery-slide {
+    flex: 1;
+    display: flex;
+}
+.image-gallery-right-nav {
+    left: calc(100% - 180px) !important;
+    right: auto !important;
+    position: fixed !important;
+}
