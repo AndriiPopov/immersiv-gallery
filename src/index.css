@@ -24,8 +24,17 @@ code {
     background-color: black;
 }
 
+.image-gallery-thumbnails-container {
+    transform: none !important;
+}
+
+.image-gallery-thumbnail {
+    border: 3px solid transparent !important;
+    outline: none !important;
+}
+
 .buttons {
-    height: 50px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,14 +45,20 @@ code {
 .buttons > div {
     margin: 20px;
     cursor: pointer;
-    border: 4px solid transparent;
+    border: 3px solid transparent;
     transition: border 0.3s ease-out;
+    width: 60px;
+    height: 60px;
 }
 
-.buttons > div:hover,
-.buttons > div.active {
-    outline: none;
-    border: 4px solid #337ab7;
+.buttons > div.active,
+.image-gallery-thumbnail.active {
+    outline: none !important;
+    border: 3px solid #337ab7 !important;
+}
+
+.buttons > div > img {
+    width: 100%;
 }
 
 .image-gallery,
@@ -79,8 +94,7 @@ code {
     flex: 1;
     display: flex;
 }
-.image-gallery-right-nav {
-    left: calc(100% - 180px) !important;
-    right: auto !important;
-    position: fixed !important;
+
+.image-gallery-slide {
+    height: 100% !important;
 }

@@ -1,6 +1,3 @@
-import video from "./video.svg";
-import plan from "./plan.svg";
-import photo from "./photo.svg";
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -44,6 +41,10 @@ function App() {
                 console.log(er);
             });
     }, []);
+
+    useEffect(() => {
+        setSlide(0);
+    }, [tab]);
 
     const images =
         items
@@ -96,19 +97,19 @@ function App() {
                     onClick={() => handleTabClick("photo")}
                     className={tab === "photo" ? "active" : undefined}
                 >
-                    <img src={photo} />
+                    <img src="/gallery/photo.png" />
                 </div>
                 <div
                     onClick={() => handleTabClick("plan")}
                     className={tab === "plan" ? "active" : undefined}
                 >
-                    <img src={plan} />
+                    <img src="/gallery/plan.png" />
                 </div>
                 <div
                     onClick={() => handleTabClick("video")}
                     className={tab === "video" ? "active" : undefined}
                 >
-                    <img src={video} />
+                    <img src="/gallery/video.png" />
                 </div>
             </div>
             <ImageGallery
