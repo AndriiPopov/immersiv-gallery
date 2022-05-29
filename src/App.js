@@ -10,10 +10,36 @@ const baseURL =
         ? "https://tour.immersiv.com.au/api"
         : "http://localhost:5000/api";
 
+const useYTDimensions = (slide) => {
+    const [dimensions, setDimensions] = useState({ width: 1, height: 2 });
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+    }, []);
+    useEffect(() => {
+        handleResize();
+    }, [slide]);
+    const handleResize = () => {
+        const refs = document.getElementsByClassName("image-gallery-slide");
+        const ref = refs.length && refs[0];
+
+        if (ref) {
+            const boundingRect = ref.getBoundingClientRect();
+            const { width, height } = boundingRect;
+            setDimensions({
+                width: Math.round(width),
+                height: Math.round(height),
+            });
+        }
+    };
+    return dimensions;
+};
+
 function App() {
     const [items, setItems] = useState([]);
     const [tab, setTab] = useState("");
     const [slide, setSlide] = useState(0);
+    const dimensions = useYTDimensions(slide);
+
     useEffect(() => {
         const search = window.location.search;
         if (!search) {
@@ -65,18 +91,18 @@ function App() {
                         index,
                         thumbnail: `https://img.youtube.com/vi/${i.url}/default.jpg`,
                         renderItem: (k) => {
-                            console.log(slide, k.index);
-
                             return slide === k.index ? (
                                 <YouTube
                                     videoId={k.url}
-                                    className="youtubeContainer"
+                                    className={`youtubeContainer ${
+                                        dimensions.height / dimensions.width <
+                                        9 / 16
+                                            ? ""
+                                            : "youtubeContainerHight"
+                                    }`}
                                     opts={{
                                         width: "100%",
                                         height: "100%",
-                                    }}
-                                    playerVars={{
-                                        autoplay: 1,
                                     }}
                                 />
                             ) : null;
