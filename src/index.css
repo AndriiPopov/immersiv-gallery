@@ -115,3 +115,7 @@ code {
 .image-gallery-slide {
     height: 100% !important;
 }
+
+.bottom {
+    flex-direction: column;
+}

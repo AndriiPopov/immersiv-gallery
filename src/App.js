@@ -12,6 +12,7 @@ const baseURL =
 
 const useYTDimensions = (slide) => {
     const [dimensions, setDimensions] = useState({ width: 1, height: 2 });
+    const [dimensionsW, setDimensionsW] = useState({ width: 1, height: 2 });
     useEffect(() => {
         window.addEventListener("resize", handleResize);
     }, []);
@@ -24,21 +25,24 @@ const useYTDimensions = (slide) => {
 
         if (ref) {
             const boundingRect = ref.getBoundingClientRect();
-            const { width, height } = boundingRect;
             setDimensions({
-                width: Math.round(width),
-                height: Math.round(height),
+                width: Math.round(boundingRect.width),
+                height: Math.round(boundingRect.height),
             });
         }
+        setDimensionsW({
+            width: Math.round(window.innerWidth),
+            height: Math.round(window.innerHeight),
+        });
     };
-    return dimensions;
+    return { dimensions, dimensionsW };
 };
 
 function App() {
     const [items, setItems] = useState([]);
     const [tab, setTab] = useState("");
     const [slide, setSlide] = useState(0);
-    const dimensions = useYTDimensions(slide);
+    const { dimensions, dimensionsW } = useYTDimensions(slide);
 
     useEffect(() => {
         const search = window.location.search;
@@ -80,8 +84,8 @@ function App() {
                     return {
                         ...i,
                         original: i.url,
-                        thumbnail: i.url,
-                        // description: i.name,
+                        thumbnail: i.thumbnail,
+                        description: i.name,
                         originalClass: "featured-slide",
                         thumbnailClass: "featured-thumb",
                     };
@@ -144,7 +148,9 @@ function App() {
                 showFullscreenButton={false}
                 showPlayButton={false}
                 // showNav={false}
-                thumbnailPosition="right"
+                thumbnailPosition={
+                    dimensionsW.height > dimensionsW.width ? "bottom" : "right"
+                }
                 onSlide={setSlide}
                 startIndex={slide}
             />
