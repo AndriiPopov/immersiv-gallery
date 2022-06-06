@@ -22,6 +22,7 @@ code {
     flex-direction: column;
     overflow: hidden;
     background-color: black;
+    padding-bottom: 40px;
 }
 
 .image-gallery-thumbnails-container {
@@ -34,7 +35,7 @@ code {
 }
 
 .buttons {
-    height: 80px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,8 +48,8 @@ code {
     cursor: pointer;
     border: 3px solid transparent;
     transition: border 0.3s ease-out;
-    width: 60px;
-    height: 60px;
+    width: 76px;
+    height: 76px;
 }
 
 .buttons > div.active,
@@ -81,11 +82,13 @@ code {
 }
 
 .image-gallery-thumbnails-wrapper {
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .image-gallery-thumbnails {
     height: auto !important;
+    padding: 10px !important;
+    box-sizing: border-box;
 }
 
 .image-gallery-slides,
@@ -118,4 +121,20 @@ code {
 
 .bottom {
     flex-direction: column;
+}
+
+.bottom .image-gallery-thumbnail + .image-gallery-thumbnail {
+    margin-left: 10px !important;
+}
+
+.image-gallery-thumbnail {
+    width: 130px !important;
+}
+
+.right .thumbnails-swipe-vertical {
+    width: 150px !important;
+}
+
+.right .image-gallery-thumbnail + .image-gallery-thumbnail {
+    margin-top: 10px !important;
 }
