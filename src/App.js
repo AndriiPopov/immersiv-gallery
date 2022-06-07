@@ -1,9 +1,9 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ImageGallery from "react-image-gallery";
+
 import "react-image-gallery/styles/css/image-gallery.css";
-import YouTube from "react-youtube";
+import ImageGallery from "react-image-gallery";
 
 const baseURL =
     process.env.NODE_ENV === "production"
@@ -42,7 +42,7 @@ function App() {
     const [items, setItems] = useState([]);
     const [tab, setTab] = useState("");
     const [slide, setSlide] = useState(0);
-    const { dimensions, dimensionsW } = useYTDimensions(slide);
+    const { dimensionsW } = useYTDimensions(slide);
 
     useEffect(() => {
         const search = window.location.search;
@@ -93,24 +93,75 @@ function App() {
                     return {
                         ...i,
                         index,
-                        thumbnail: `https://img.youtube.com/vi/${i.url}/default.jpg`,
+                        thumbnail: i.url,
                         renderItem: (k) => {
                             return slide === k.index ? (
-                                <YouTube
-                                    videoId={k.url}
-                                    className={`youtubeContainer ${
-                                        dimensions.height / dimensions.width <
-                                        9 / 16
-                                            ? ""
-                                            : "youtubeContainerHight"
-                                    }`}
-                                    opts={{
-                                        width: "100%",
-                                        height: "100%",
-                                    }}
-                                />
+                                <video
+                                    // id="my-player"
+                                    // class="video-js"
+                                    controls
+                                    preload="auto"
+                                    autoPlay
+                                    muted
+                                    // data-setup="{}"
+                                    style={{ width: "100%", height: "100%" }}
+                                >
+                                    <source
+                                        src={i.url}
+                                        type="video/mp4"
+                                    ></source>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable
+                                        JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a
+                                            href="https://videojs.com/html5-video-support/"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            supports HTML5 video
+                                        </a>
+                                    </p>
+                                </video>
                             ) : null;
                         },
+                        renderThumbInner: (k) => (
+                            <div style={{ position: "relative" }}>
+                                <video
+                                    id="my-player"
+                                    class="video-js"
+                                    controls
+                                    data-setup="{}"
+                                    style={{ width: "100%", height: "100%" }}
+                                >
+                                    <source
+                                        src={i.url}
+                                        type="video/mp4"
+                                    ></source>
+                                    <p class="vjs-no-js">
+                                        To view this video please enable
+                                        JavaScript, and consider upgrading to a
+                                        web browser that
+                                        <a
+                                            href="https://videojs.com/html5-video-support/"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            supports HTML5 video
+                                        </a>
+                                    </p>
+                                </video>
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        left: 0,
+                                        right: 0,
+                                        top: 0,
+                                        bottom: 0,
+                                    }}
+                                />
+                            </div>
+                        ),
                     };
                 }
             })

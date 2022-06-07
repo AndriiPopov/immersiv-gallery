@@ -12,6 +12,7 @@
         "react-image-gallery": "^1.2.8",
         "react-scripts": "5.0.1",
         "react-youtube": "^9.0.2",
+        "video.js": "^7.19.2",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
